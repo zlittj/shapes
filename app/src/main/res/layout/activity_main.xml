@@ -2,19 +2,29 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable name="shape" type="com.shapes.jzachlittle.shapes.Shape"/>
+        <variable
+            name="presenter"
+            type="com.shapes.jzachlittle.shapes.MainActivityPresenter"/>
+        <import type="android.view.View"/>
     </data>
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:elevation="0dp"
+        android:translationZ="0dp"
+        android:id="@+id/backdrop"
         android:background="@color/mainBackground">
-        <ImageView android:layout_width="wrap_content"
+
+        <ImageButton android:layout_width="wrap_content"
+            android:id="@+id/imageShape"
             android:layout_height="wrap_content"
             android:layout_marginTop="@{shape.imageLayoutMarginBottom}"
             android:layout_marginStart="@{shape.imageLayoutMarginLeft}"
-            android:elevation="15dp"
+            android:elevation="25dp"
             android:translationZ="10dp"
             android:background="@{shape.image}"/>
+
         <ImageView android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@{shape.holeLayoutMarginBottom}"
