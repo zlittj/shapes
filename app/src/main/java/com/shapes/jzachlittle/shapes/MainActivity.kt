@@ -63,25 +63,30 @@ class MainActivity : AppCompatActivity(), ShapesContract.View, View.OnDragListen
     }
 
     override fun onDrag(v: View?, event: DragEvent?): Boolean {
-        val view = event!!.localState as View
-        Log.i("TAG", "onDragEvent: " + event.action)
-        if (event.action == DragEvent.ACTION_DROP) {
-            val viewGroup = view.parent as ViewGroup
-            viewGroup.removeView(view)
-            val relativeLayout = v as RelativeLayout
-            view.x = event.x - imageWidth/2
-            view.y = event.y - imageHeight/2
-            Log.i("TAG", "onDrag holex: " + holeX+ " holey:"+holeY )
-            Log.i("TAG", "onDrag holewidth: " + holeWidth+ " holeHeight:"+holeHeight )
-            Log.i("TAG", "onDrag x: " + view.x+ " y:"+view.y  )
-            relativeLayout.addView(view)
-            if (isInBounds(Math.round(view.x), Math.round(view.y))) {
-                view.visibility = View.INVISIBLE
-            } else {
-                view.visibility = View.VISIBLE
+        if (event != null) {
+            val view = event.localState as? View
+            Log.i("TAG", "onDragEvent: " + event.action)
+            if (event.action == DragEvent.ACTION_DROP && view != null) {
+                val viewGroup = view.parent as? ViewGroup
+                if (viewGroup != null) {
+                    viewGroup.removeView(view)
+                    val relativeLayout = v as RelativeLayout
+                    view.x = event.x - imageWidth / 2
+                    view.y = event.y - imageHeight / 2
+                    Log.i("TAG", "onDrag holex: " + holeX + " holey:" + holeY)
+                    Log.i("TAG", "onDrag holewidth: " + holeWidth + " holeHeight:" + holeHeight)
+                    Log.i("TAG", "onDrag x: " + view.x + " y:" + view.y)
+                    relativeLayout.addView(view)
+                    if (isInBounds(Math.round(view.x), Math.round(view.y))) {
+                        view.visibility = View.INVISIBLE
+                    } else {
+                        view.visibility = View.VISIBLE
+                    }
+                }
             }
+            return true
         }
-        return true
+        return false
     }
 
     fun isInBounds(x: Int, y: Int): Boolean {
@@ -94,15 +99,16 @@ class MainActivity : AppCompatActivity(), ShapesContract.View, View.OnDragListen
 
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-        Log.i("TAG", "onEvent: " + event!!.action)
-        if (event!!.actionButton == MotionEvent.ACTION_DOWN) {
-            val shadowBuilder = View.DragShadowBuilder(v)
-            v!!.visibility = View.INVISIBLE
-            v?.startDragAndDrop(null, shadowBuilder, v, 0)
-            return true
-        } else if (event!!.actionButton == MotionEvent.ACTION_UP) {
-            v!!.visibility = View.VISIBLE
-            return false
+        if (event != null && v != null) {
+            if (event.actionButton == MotionEvent.ACTION_DOWN) {
+                val shadowBuilder = View.DragShadowBuilder(v)
+                v.visibility = View.INVISIBLE
+                v?.startDragAndDrop(null, shadowBuilder, v, 0)
+                return true
+            } else if (event!!.actionButton == MotionEvent.ACTION_UP) {
+                v!!.visibility = View.VISIBLE
+                return false
+            }
         }
         return false
     }
