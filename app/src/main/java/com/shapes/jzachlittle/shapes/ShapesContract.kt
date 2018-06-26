@@ -9,6 +9,6 @@ interface ShapesContract {
     }
 
     interface View {
-        fun updateView()
+        fun updateView(randomShape: RandomShape)
     }
 }

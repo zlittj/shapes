@@ -16,19 +16,19 @@
         android:id="@+id/backdrop"
         android:background="@color/mainBackground">
 
-        <ImageButton android:layout_width="wrap_content"
+        <ImageView android:layout_width="wrap_content"
             android:id="@+id/imageShape"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@{shape.imageLayoutMarginBottom}"
-            android:layout_marginStart="@{shape.imageLayoutMarginLeft}"
+            android:layout_marginTop="@{shape.imageLayoutMarginTop}"
+            android:layout_marginStart="@{shape.imageLayoutMarginStart}"
             android:elevation="25dp"
             android:translationZ="10dp"
             android:background="@{shape.image}"/>
 
         <ImageView android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@{shape.holeLayoutMarginBottom}"
-            android:layout_marginStart="@{shape.holeLayoutMarginLeft}"
+            android:layout_marginTop="@{shape.holeLayoutMarginTop}"
+            android:layout_marginStart="@{shape.holeLayoutMarginStart}"
             android:elevation="10dp"
             android:translationZ="10dp"
             android:background="@{shape.hole}"/>

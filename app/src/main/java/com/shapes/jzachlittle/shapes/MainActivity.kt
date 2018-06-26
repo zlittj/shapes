@@ -21,12 +21,15 @@ class MainActivity : AppCompatActivity(), ShapesContract.View, View.OnDragListen
     var holeHeight = 0
     var holeX = 0
     var holeY = 0
+    var id = 0
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         var mainActivityPresenter = MainActivityPresenter(this)
-        var shape = Shape(getDrawable(R.drawable.square), this.getDrawable(R.drawable.square_hole),
+        val shape = Shape(getDrawable(R.drawable.square), this.getDrawable(R.drawable.square_hole),
                 50, 50, 150, 100)
         setParams(shape)
         binding.shape = shape
@@ -36,8 +39,8 @@ class MainActivity : AppCompatActivity(), ShapesContract.View, View.OnDragListen
         binding.executePendingBindings()
     }
 
-    override fun updateView() {
-        Log.i("TAG", "inMainActivity")
+    override fun updateView(randomShape: RandomShape) {
+
     }
 
     fun setParams(shape: Shape) {
@@ -45,8 +48,8 @@ class MainActivity : AppCompatActivity(), ShapesContract.View, View.OnDragListen
         imageHeight = shape.image.intrinsicHeight
         holeWidth = shape.hole.intrinsicWidth/2
         holeHeight = shape.hole.intrinsicHeight/2
-        holeX = shape.holeLayoutMarginLeft
-        holeY = shape.holeLayoutMarginBottom
+        holeX = shape.holeLayoutMarginStart
+        holeY = shape.holeLayoutMarginTop
 
     }
 

@@ -6,15 +6,24 @@ import android.view.ViewGroup
 import android.widget.ImageView
 
 
-class MarginBindingAdapter {
+object MarginBindingAdapter {
 
-//    companion object {
-//        @BindingAdapter("android:layout_marginBottom")
-//        fun setBottomMargin(view: View, bottomMargin: Float) {
-//            val layoutParams = view.layoutParams as ViewGroup.MarginLayoutParams
-//            layoutParams.setMargins(layoutParams.leftMargin, layoutParams.topMargin,
-//                    layoutParams.rightMargin, Math.round(bottomMargin))
-//            view.layoutParams = layoutParams
-//        }
-//    }
+        @BindingAdapter("android:layout_marginTop")
+        @JvmStatic
+        fun setTopMargin(view: View, topMargin: Float) {
+            val layoutParams = view.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.setMargins(layoutParams.leftMargin, Math.round(topMargin),
+                    layoutParams.rightMargin, layoutParams.bottomMargin)
+            view.layoutParams = layoutParams
+        }
+
+        @BindingAdapter("android:layout_marginStart")
+        @JvmStatic
+        fun setStartargin(view: View, startMargin: Float) {
+            val layoutParams = view.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.setMargins(Math.round(startMargin), layoutParams.topMargin,
+                    layoutParams.rightMargin, layoutParams.bottomMargin)
+            view.layoutParams = layoutParams
+        }
+
 }
