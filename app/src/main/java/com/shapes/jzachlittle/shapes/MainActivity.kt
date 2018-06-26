@@ -27,20 +27,29 @@ class MainActivity : AppCompatActivity(), ShapesContract.View, View.OnDragListen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setShape()
+    }
+
+    override fun updateView(randomShape: RandomShape) {
+        setShape(randomShape)
+    }
+
+    fun setShape() {
+        setShape(randomShape = RandomShape(R.drawable.square, R.drawable.square_hole,
+                50, 50, 150, 100))
+    }
+
+    fun setShape(randomShape: RandomShape) {
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         var mainActivityPresenter = MainActivityPresenter(this)
-        val shape = Shape(getDrawable(R.drawable.square), this.getDrawable(R.drawable.square_hole),
-                50, 50, 150, 100)
+        val shape = Shape(getDrawable(randomShape.image), this.getDrawable(randomShape.hole),
+                randomShape.imageLayoutMarginBottom, randomShape.imageLayoutMarginStart, randomShape.holeLayoutMarginBottom, randomShape.holeLayoutMarginStart)
         setParams(shape)
         binding.shape = shape
         binding.presenter = mainActivityPresenter
         findViewById<RelativeLayout>(R.id.backdrop).setOnDragListener(this)
         findViewById<ImageView>(R.id.imageShape).setOnTouchListener(this)
         binding.executePendingBindings()
-    }
-
-    override fun updateView(randomShape: RandomShape) {
-
     }
 
     fun setParams(shape: Shape) {

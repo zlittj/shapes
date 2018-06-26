@@ -5,7 +5,7 @@ import android.view.View
 interface ShapesContract {
 
     interface Presenter {
-        fun onShapeDrag(view: android.view.View)
+        fun onHoleClickReset()
     }
 
     interface View {

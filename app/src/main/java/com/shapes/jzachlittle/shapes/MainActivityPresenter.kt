@@ -7,11 +7,12 @@ import java.util.*
 
 class MainActivityPresenter(var shapesContract: ShapesContract.View) : ShapesContract.Presenter {
 
-    override fun onShapeDrag(view: View) {
-        //shapesContract.updateView()
+    override fun onHoleClickReset() {
+        shapesContract.updateView(setupShape())
+
     }
 
-    fun setupShape() {
+    fun setupShape(): RandomShape {
         val shapeInt = (0..1).random()
         val holeMarginBottom = (0..400).random()
         val holeMargiStart = (0..1000).random()
@@ -20,6 +21,7 @@ class MainActivityPresenter(var shapesContract: ShapesContract.View) : ShapesCon
         val shapeDrawables = getTheGood(shapeInt)
         val randomShape = RandomShape(shapeDrawables.image, shapeDrawables.hole, imageMarginBottom, imageMarginStart,
                 holeMarginBottom, holeMargiStart)
+        return randomShape
     }
 
     fun getTheGood(positon: Int): MainActivityPresenter.shapeDrawables {
